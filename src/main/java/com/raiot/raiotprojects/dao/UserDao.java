@@ -10,7 +10,6 @@ import java.util.Optional;
 public class UserDao implements DAOInterface<UserModel> {
     private List<UserModel> users = new ArrayList<>();
 
-    @Override
     public Optional<UserModel> getByEmail(String email) {
         return Optional.ofNullable(users.stream().filter(p -> p.getEmail().equals(email)).findAny()
                 .orElse(null));
