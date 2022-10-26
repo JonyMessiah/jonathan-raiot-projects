@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.HomeController">
+   <children>
+      <Label id="title_Raiot" layoutX="51.0" layoutY="40.0" prefHeight="51.0" prefWidth="535.0" text=" Bienvenido a Raiot, ¿qué desea realizar?">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Label>
+      <Button id="btn_AddProject" layoutX="189.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="222.0" text="Agregar un proyecto">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
