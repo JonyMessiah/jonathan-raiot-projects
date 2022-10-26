@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="490.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.RegisterController">
+   <children>
+      <Label id="title_Register" layoutX="249.0" layoutY="7.0" prefHeight="42.0" prefWidth="196.0" text="   Registro" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="33.0" />
+         </font>
+      </Label>
+      <Label id="txt_Name" layoutX="238.0" layoutY="56.0" prefHeight="20.0" prefWidth="128.0" text="Ingrese su nombre">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label id="txt_LastName" layoutX="234.0" layoutY="110.0" text="Ingrese su apellido">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label id="txt_Age" layoutX="237.0" layoutY="155.0" text="Ingrese su edad">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label id="txt_Email" layoutX="236.0" layoutY="205.0" text="Ingrese su email">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label id="txt_Password" layoutX="235.0" layoutY="257.0" text="Ingrese su contraseña">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label id="txt_ProfilePic" layoutX="236.0" layoutY="312.0" text="Ingrese su foto de perfil">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField id="field_Name" layoutX="234.0" layoutY="76.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Jonathan." />
+      <TextField id="field_Email" layoutX="234.0" layoutY="225.0" prefHeight="25.0" prefWidth="225.0" text="Ej: jonathan89@gmail.com" />
+      <TextField id="field_Age" layoutX="234.0" layoutY="175.0" prefHeight="25.0" prefWidth="225.0" text="Ej: 20" />
+      <TextField id="field_LastName" layoutX="234.0" layoutY="130.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Mendéz" />
+      <PasswordField id="field_Password" layoutX="234.0" layoutY="277.0" prefHeight="25.0" prefWidth="225.0" />
+      <Button id="btn_Register" layoutX="264.0" layoutY="410.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="174.0" text="Registrarse">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
