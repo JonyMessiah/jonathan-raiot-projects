@@ -1,11 +1,16 @@
 package com.raiot.raiotprojects.controllers;
 
+import com.raiot.raiotprojects.RaiotProjectsApplication;
 import com.raiot.raiotprojects.dao.SQLiteDao;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,14 +60,7 @@ public class ProjectController {
         String repository = field_Repository.getText();
 
 
-        String age = field_CreatedAt.getText();
-        if (created_at.matches("[0-9, /]+") == false) {
-            label_Error.setVisible(true);
-            label_Error.setText("Debe escribir la fecha de la siguiente manera: 19/10/2022. Asegurese de usar numeros.");
-            return;
-        }
-
-        String query = "INSERT INTO users (name, category, created_at, updated_at, repository) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO project (name, category, created_at, updated_at, repository) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, name);
         pstmt.setString(2, category);
@@ -72,6 +70,14 @@ public class ProjectController {
 
         pstmt.executeUpdate();
 
+        onRegisterClick();
+
+    }
+
+    protected void onRegisterClick() throws  Exception {
+        Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
+        Stage window = (Stage) btn_Register.getScene().getWindow();
+        window.setScene(new Scene(registerScene));
     }
 
 }
