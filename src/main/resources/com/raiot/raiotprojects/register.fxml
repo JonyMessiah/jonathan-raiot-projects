@@ -40,8 +40,8 @@
       <TextField id="field_Email" fx:id="field_Email" layoutX="234.0" layoutY="225.0" prefHeight="25.0" prefWidth="225.0" text="Ej: jonathan89@gmail.com" />
       <TextField id="field_Age" fx:id="field_Age" layoutX="234.0" layoutY="175.0" prefHeight="25.0" prefWidth="225.0" text="Ej: 20" />
       <TextField id="field_LastName" fx:id="field_LastName" layoutX="234.0" layoutY="130.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Mendéz" />
-      <PasswordField id="field_Password" layoutX="234.0" layoutY="277.0" prefHeight="25.0" prefWidth="225.0" />
-      <Button id="btn_Registrarse" fx:id="btn_Register" layoutX="260.0" layoutY="392.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="174.0" text="Registrarse">
+      <PasswordField fx:id="field_Password" layoutX="234.0" layoutY="277.0" prefHeight="25.0" prefWidth="225.0" />
+      <Button id="btn_Registrarse" fx:id="btn_Register" layoutX="260.0" layoutY="392.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="174.0" text="Registrarse" onAction="#onRegisterButtonClick">
          <font>
             <Font size="20.0" />
          </font>
@@ -51,7 +51,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="label_Error" layoutX="44.0" layoutY="493.0" text="Ha ingresado valores no validos, asegurese de rellenar todos los espacios como se le indica." textFill="#ee4242">
+      <Label fx:id="label_Error" layoutX="44.0" layoutY="493.0" text="Ha ingresado valores no validos, asegurese de rellenar todos los espacios como se le indica." textFill="#ee4242" visible="false">
          <font>
             <Font size="15.0" />
          </font>
