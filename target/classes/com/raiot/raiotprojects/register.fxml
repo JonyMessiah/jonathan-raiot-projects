@@ -36,17 +36,17 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField id="field_Name" layoutX="234.0" layoutY="76.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Jonathan." />
-      <TextField id="field_Email" layoutX="234.0" layoutY="225.0" prefHeight="25.0" prefWidth="225.0" text="Ej: jonathan89@gmail.com" />
-      <TextField id="field_Age" layoutX="234.0" layoutY="175.0" prefHeight="25.0" prefWidth="225.0" text="Ej: 20" />
-      <TextField id="field_LastName" layoutX="234.0" layoutY="130.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Mendéz" />
+      <TextField id="field_Name" fx:id="field_Name" layoutX="234.0" layoutY="76.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Jonathan." />
+      <TextField id="field_Email" fx:id="field_Email" layoutX="234.0" layoutY="225.0" prefHeight="25.0" prefWidth="225.0" text="Ej: jonathan89@gmail.com" />
+      <TextField id="field_Age" fx:id="field_Age" layoutX="234.0" layoutY="175.0" prefHeight="25.0" prefWidth="225.0" text="Ej: 20" />
+      <TextField id="field_LastName" fx:id="field_LastName" layoutX="234.0" layoutY="130.0" prefHeight="25.0" prefWidth="225.0" text="Ej: Mendéz" />
       <PasswordField id="field_Password" layoutX="234.0" layoutY="277.0" prefHeight="25.0" prefWidth="225.0" />
-      <Button id="btn_Register" layoutX="264.0" layoutY="410.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="174.0" text="Registrarse">
+      <Button id="btn_Registrarse" fx:id="btn_Register" layoutX="264.0" layoutY="410.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="174.0" text="Registrarse">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button id="btn_BackLogin" layoutX="484.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="212.0" text="Volver a inicio de sesión">
+      <Button id="btn_BackLogin" fx:id="btn_BackLogin" layoutX="484.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="212.0" text="Volver a inicio de sesión">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
