@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RaiotProjectsApplication extends Application {
+
+    public static  Integer user_id;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(

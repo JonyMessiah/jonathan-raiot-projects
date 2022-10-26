@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.LoginController">
    <children>
-      <TextField id="field_Email" layoutX="148.0" layoutY="148.0" prefHeight="42.0" prefWidth="304.0" />
+      <TextField fx:id="field_Email" layoutX="148.0" layoutY="148.0" prefHeight="42.0" prefWidth="304.0" />
       <Label id="txt_Password" layoutX="148.0" layoutY="207.0" prefHeight="17.0" prefWidth="293.0" text="Ingrese su contraseña">
          <font>
             <Font size="20.0" />
@@ -22,7 +22,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <PasswordField id="field_Password" layoutX="148.0" layoutY="244.0" prefHeight="42.0" prefWidth="304.0" />
+      <PasswordField fx:id="field_Password" layoutX="148.0" layoutY="244.0" prefHeight="42.0" prefWidth="304.0" />
       <Hyperlink fx:id="hyperlink_Register" layoutX="178.0" layoutY="400.0" onMouseClicked="#onRegisterClick" prefHeight="52.0" prefWidth="245.0" text="   Presione aquí para registrarse">
          <font>
             <Font size="16.0" />
@@ -38,7 +38,7 @@
             <Font name="Arial Rounded MT Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="80.0" text="Ha ingresado un correo electronico o contraseña invalido." textFill="#ff2626">
+      <Label fx:id="label_Error" layoutX="135.0" layoutY="80.0" text="Ha ingresado un correo electronico o contraseña invalido." textFill="#ff2626" visible="false">
          <font>
             <Font size="13.0" />
          </font></Label>
