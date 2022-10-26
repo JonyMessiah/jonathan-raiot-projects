@@ -36,6 +36,7 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() throws Exception {
+
         label_Error.setVisible(false);
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
@@ -66,6 +67,21 @@ public class LoginController {
             }
             break;
         }
+
+        if (email==null || email==" ") {
+            //Error
+            label_Error.setVisible(true);
+            return;
+
+        }
+
+        if (password.equals(null) || password.equals(" ")) {
+            label_Error.setVisible(true);
+            return;
+
+
+        }
+
 
         if (!exists) {
             // Error
