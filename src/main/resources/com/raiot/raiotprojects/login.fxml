@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.LoginController">
+   <children>
+      <TextField id="field_Email" layoutX="148.0" layoutY="148.0" prefHeight="42.0" prefWidth="304.0" />
+      <Label id="txt_Password" layoutX="148.0" layoutY="207.0" prefHeight="17.0" prefWidth="293.0" text="Ingrese su contraseña">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label id="txt_Email" layoutX="148.0" layoutY="108.0" prefHeight="30.0" prefWidth="273.0" text="Ingrese su correo electronico">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label id="txt_NoUsser" layoutX="218.0" layoutY="370.0" text="¿No tiene usuario?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <PasswordField id="field_Password" layoutX="148.0" layoutY="244.0" prefHeight="42.0" prefWidth="304.0" />
+      <Hyperlink id="hyperlink_Register" layoutX="178.0" layoutY="400.0" prefHeight="52.0" prefWidth="245.0" text="   Presione aquí para registrarse">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Hyperlink>
+      <Button id="btn_Login" layoutX="228.0" layoutY="308.0" mnemonicParsing="false" text="Iniciar sesión.">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label id="title_Login" layoutX="116.0" layoutY="34.0" text="Bienvenido, inicie sesión." textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
