@@ -11,7 +11,7 @@
             <Font name="Arial Rounded MT Bold" size="26.0" />
          </font>
       </Label>
-      <Button id="btn_AddProject" layoutX="189.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="222.0" text="Agregar un proyecto">
+      <Button fx:id="btn_AddProject" layoutX="189.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="222.0" text="Agregar un proyecto" onAction="#onAddProjectClick">
          <font>
             <Font size="20.0" />
          </font></Button>
