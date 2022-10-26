@@ -39,6 +39,7 @@ public class RegisterController {
     @FXML
     TextField field_Age;
 
+    @FXML
     protected void onBackLoginButtonClick() throws Exception {
 
         Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("login.fxml"));
