@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="460.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
+<AnchorPane prefHeight="521.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
    <children>
       <Label id="title_Register" layoutX="183.0" layoutY="14.0" prefHeight="49.0" prefWidth="373.0" text="   Registrar proyecto" textAlignment="CENTER">
          <font>
@@ -31,15 +31,20 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField id="field_Name" layoutX="223.0" layoutY="101.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Ligol" />
-      <TextField id="field_UpdatedAt" layoutX="223.0" layoutY="250.0" prefHeight="25.0" prefWidth="281.0" text="Ej; 11/9/2022" />
-      <TextField id="field_CreatedAt" layoutX="223.0" layoutY="200.0" prefHeight="25.0" prefWidth="281.0" text="Ej: 10/9/2022" />
-      <TextField id="field_Category" layoutX="223.0" layoutY="155.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Videojuego" />
-      <PasswordField id="field_Repository" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
-      <Button id="btn_Register" layoutX="260.0" layoutY="351.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="182.0" text="Registrar">
+      <TextField fx:id="field_Name" layoutX="223.0" layoutY="101.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Ligol" />
+      <TextField fx:id="field_UpdatedAt" layoutX="223.0" layoutY="250.0" prefHeight="25.0" prefWidth="281.0" text="Ej; 11/9/2022" />
+      <TextField fx:id="field_CreatedAt" layoutX="223.0" layoutY="200.0" prefHeight="25.0" prefWidth="281.0" text="Ej: 10/9/2022" />
+      <TextField fx:id="field_Category" layoutX="223.0" layoutY="155.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Videojuego" />
+      <Button fx:id="btn_Register" layoutX="260.0" layoutY="351.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="182.0" text="Registrar">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
+      <TextField fx:id="field_Repository" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label fx:id="label_Error" layoutX="165.0" layoutY="457.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
