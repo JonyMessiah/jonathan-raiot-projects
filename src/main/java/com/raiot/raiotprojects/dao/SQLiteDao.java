@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class SQLiteDao {
-    private Connection connection = null;
+    private static Connection connection = null;
 
     public Connection getConnection() {
         if (connection == null) {

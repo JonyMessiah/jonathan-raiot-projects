@@ -60,13 +60,14 @@ public class ProjectController {
         String repository = field_Repository.getText();
 
 
-        String query = "INSERT INTO project (name, category, created_at, updated_at, repository) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO projects (name, category, created_at, updated_at, repository, user_id) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, name);
         pstmt.setString(2, category);
         pstmt.setString(3, created_at);
         pstmt.setString(4, updated_at);
         pstmt.setString(5, repository);
+        pstmt.setInt(6, RaiotProjectsApplication.user_id);
 
         pstmt.executeUpdate();
 

@@ -15,5 +15,9 @@
          <font>
             <Font size="20.0" />
          </font></Button>
+      <Label fx:id="label_Count" layoutX="135.0" layoutY="80.0" text="Existen 0 proyectos para tu usuario" textFill="#ff2626" visible="false">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
    </children>
 </AnchorPane>
