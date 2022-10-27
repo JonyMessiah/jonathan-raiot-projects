@@ -45,17 +45,31 @@ public class ProjectController {
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
 
-        // TODO validate if email exists
-
-        //TODO Validations, including age being a number
-
         String name = field_Name.getText();
 
         String category = field_Category.getText();
 
+        if (category.matches("^[a-zA-Z]*$") == false) {
+            label_Error.setVisible(true);
+            label_Error.setText("Solo puede utilizar letras en el nombre de la categoria.");
+            return;
+        }
+
         String created_at = field_CreatedAt.getText();
 
+        if (created_at.matches("[0-9]+") == false) {
+            label_Error.setVisible(true);
+            label_Error.setText("La fecha debe de estar puesta con numeros.");
+            return;
+        }
+
         String updated_at = field_UpdatedAt.getText();
+
+        if (updated_at.matches("[0-9]+") == false) {
+            label_Error.setVisible(true);
+            label_Error.setText("La fecha debe de estar puesta con numeros.");
+            return;
+        }
 
         String repository = field_Repository.getText();
 

@@ -11,6 +11,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,15 +52,38 @@ public class RegisterController {
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
 
-        // TODO validate if email exists
-
-        //TODO Validations, including age being a number
-
         String name = field_Name.getText();
+
+        if (name.matches("^[a-zA-Z]$") == false) {
+            label_Error.setVisible(true);
+            label_Error.setText("Solo puede utilizar letras en su nombre.");
+            return;
+        }
 
         String lastname = field_LastName.getText();
 
+        if (lastname.matches("^[a-zA-Z]$") == false) {
+            label_Error.setVisible(true);
+            label_Error.setText("Solo puede utilizar letras en su apellido.");
+            return;
+
+        }
+
         String email = field_Email.getText();
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+
+
+        } else {
+            label_Error.setVisible(true);
+            label_Error.setText("Por favor, ingrese una dirección de correo valida.");
+            return;
+        }
+
 
         String password = field_Password.getText();
 
