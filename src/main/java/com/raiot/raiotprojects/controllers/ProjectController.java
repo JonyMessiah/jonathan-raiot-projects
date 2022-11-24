@@ -57,7 +57,7 @@ public class ProjectController {
 
         String created_at = field_CreatedAt.getText();
 
-        if (created_at.matches("[0-9]+") == false) {
+        if (created_at.matches("[0-9 /]+") == false) {
             label_Error.setVisible(true);
             label_Error.setText("La fecha debe de estar puesta con numeros.");
             return;
@@ -65,7 +65,7 @@ public class ProjectController {
 
         String updated_at = field_UpdatedAt.getText();
 
-        if (updated_at.matches("[0-9]+") == false) {
+        if (updated_at.matches("[0-9 /]+") == false) {
             label_Error.setVisible(true);
             label_Error.setText("La fecha debe de estar puesta con numeros.");
             return;
