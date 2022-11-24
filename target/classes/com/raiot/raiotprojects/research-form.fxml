@@ -40,7 +40,7 @@
                 <Font name="Arial" size="20.0" />
             </font>
         </Button>
-        <TextField fx:id="field_Repository" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
+        <TextField id="autor" fx:id="field_Autor" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
         <Label fx:id="label_Error" layoutX="173.0" layoutY="515.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
             <font>
                 <Font size="15.0" />

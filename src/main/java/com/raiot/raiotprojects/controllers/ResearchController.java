@@ -32,6 +32,15 @@ public class ResearchController {
     TextField field_CreatedAt;
 
     @FXML
+    TextField field_Theme;
+
+    @FXML
+    TextField field_Subtitle;
+
+    @FXML
+    TextField field_Autor;
+
+    @FXML
     TextField field_UpdatedAt;
 
     @FXML
@@ -45,6 +54,10 @@ public class ResearchController {
         Connection connection = sqlite.getConnection();
 
         String name = field_Name.getText();
+        String theme = field_Theme.getText();
+        String subtitle = field_Subtitle.getText();
+        String autor = field_Autor.getText();
+
 
         String category = field_Category.getText();
 
@@ -73,14 +86,15 @@ public class ResearchController {
         String repository = field_Repository.getText();
 
 
-        String query = "INSERT INTO projects (name, category, created_at, updated_at, repository, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO researchs (name, category, created_at, updated_at, theme, subtitle user_id) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, name);
         pstmt.setString(2, category);
         pstmt.setString(3, created_at);
         pstmt.setString(4, updated_at);
-        pstmt.setString(5, repository);
-        pstmt.setInt(6, RaiotProjectsApplication.user_id);
+        pstmt.setString(5, theme);
+        pstmt.setString(6, subtitle);
+        pstmt.setString(7, autor);
 
         pstmt.executeUpdate();
 
