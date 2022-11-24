@@ -29,7 +29,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button id="btn_ModifyResearch" fx:id="btn_ModifyResearch" layoutX="318.0" layoutY="113.0" mnemonicParsing="false" onAction="#onAddProjectClick" prefHeight="60.0" prefWidth="276.0" text="Modificar una investigacion">
+      <Button id="btn_ModifyResearch" fx:id="btn_ModifyResearch" layoutX="318.0" layoutY="113.0" mnemonicParsing="false" onAction="#onEditResearchClick" prefHeight="60.0" prefWidth="276.0" text="Modificar una investigacion">
          <font>
             <Font size="20.0" />
          </font>

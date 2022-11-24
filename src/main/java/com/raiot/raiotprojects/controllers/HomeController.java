@@ -28,6 +28,9 @@ public class HomeController {
     Button btn_AddResearch;
 
     @FXML
+    Button btn_ModifyResearch;
+
+    @FXML
     Label label_Count;
     @FXML
     public void initialize() throws Exception {
@@ -48,14 +51,23 @@ public class HomeController {
         if (total_projects == 0) {
             btn_ModifyProject.setVisible(false);
         }
+
+        String queryResearches = "SELECT COUNT(*) AS recordCount FROM researches WHERE  user_id = ?";
+
+        PreparedStatement pstmtResearches  = connection.prepareStatement(queryResearches);
+        pstmtResearches.setInt(1, RaiotProjectsApplication.user_id);
+        ResultSet rsresearches    = pstmtResearches.executeQuery();
+        rsresearches.next();
+        Integer total_researches = rsresearches.getInt("recordCount");
+
+        if (total_researches == 0) {
+            btn_ModifyResearch.setVisible(false);
+        }
     }
 
 
     @FXML
     protected void onAddProjectClick() throws IOException, SQLException {
-        SQLiteDao sqlite = new SQLiteDao();
-        Connection connection = sqlite.getConnection();
-
         FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project.fxml"));
         Parent root = registerScene.load();
         ProjectController projectController = registerScene.getController();
@@ -66,9 +78,6 @@ public class HomeController {
 
     @FXML
     protected void onModifyProjectClick() throws IOException, SQLException {
-        SQLiteDao sqlite = new SQLiteDao();
-        Connection connection = sqlite.getConnection();
-
         FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project.fxml"));
         Parent root = registerScene.load();
         ProjectController projectController = registerScene.getController();
@@ -79,12 +88,20 @@ public class HomeController {
 
     @FXML
     protected void  onAddResearchClick() throws Exception {
-        SQLiteDao sqlite = new SQLiteDao();
-        Connection connection = sqlite.getConnection();
-
         Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("research-form.fxml"));
         Stage window = (Stage) btn_AddResearch.getScene().getWindow();
         window.setScene(new Scene(registerScene));
+    }
+
+
+    @FXML
+    protected void  onEditResearchClick() throws Exception {
+        FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-form.fxml"));
+        Parent root = scene.load();
+        ResearchController controller = scene.getController();
+        controller.setEdit(true);
+        Stage window = (Stage) btn_ModifyResearch.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
 
