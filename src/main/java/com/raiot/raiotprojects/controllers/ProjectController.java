@@ -28,6 +28,8 @@ public class ProjectController {
     @FXML
     Button btn_Register;
 
+    @FXML
+    Button btn_Delete;
 
     @FXML
     TextField field_Name;
@@ -53,11 +55,8 @@ public class ProjectController {
     Integer id;
     Boolean editing = false;
 
-    void loadProject() {
-        field_Name.setText("Text initial");
-    }
-
     void setEdit(Boolean edit) throws SQLException {
+        btn_Delete.setVisible(false);
         if (edit) {
 
             SQLiteDao sqlite = new SQLiteDao();
@@ -104,6 +103,7 @@ public class ProjectController {
                                     field_Repository.setDisable(false);
                                     field_Repository.setText(rs.getString("repository"));
                                 }
+                                btn_Delete.setVisible(true);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -128,6 +128,19 @@ public class ProjectController {
             field_Category.setDisable(false);
             field_Repository.setDisable(false);
         }
+    }
+
+    @FXML void onDeleteButtonClick() throws  Exception {
+        SQLiteDao sqlite = new SQLiteDao();
+        Connection connection = sqlite.getConnection();
+
+        String query = "DELETE FROM projects WHERE id = ?";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setInt(1, id);
+
+        pstmt.executeUpdate();
+
+        onRegisterClick();
     }
 
     @FXML void onRegisterButtonClick() throws Exception {

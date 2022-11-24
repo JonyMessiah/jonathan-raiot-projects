@@ -38,17 +38,22 @@
       <TextField fx:id="field_UpdatedAt" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="281.0" text="Ej; 11/9/2022" />
       <TextField fx:id="field_CreatedAt" layoutX="212.0" layoutY="225.0" prefHeight="25.0" prefWidth="281.0" text="Ej: 10/9/2022" />
       <TextField fx:id="field_Category" layoutX="212.0" layoutY="180.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Videojuego" />
-      <Button fx:id="btn_Register" layoutX="249.0" layoutY="376.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="78.0" prefWidth="182.0" text="Registrar">
+      <Button fx:id="btn_Register" layoutX="192.0" layoutY="373.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="25.0" prefWidth="141.0" text="Registrar">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
       <TextField fx:id="field_Repository" layoutX="212.0" layoutY="327.0" prefHeight="25.0" prefWidth="281.0" />
-      <Label fx:id="label_Error" layoutX="154.0" layoutY="482.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
+      <Label fx:id="label_Error" layoutX="166.0" layoutY="435.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
       <ChoiceBox fx:id="choices_Projects" layoutX="232.0" layoutY="72.0" prefWidth="150.0" visible="false" />
+      <Button fx:id="btn_Delete" visible="false" layoutX="370.0" layoutY="373.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="25.0" prefWidth="141.0" text="Eliminar">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
