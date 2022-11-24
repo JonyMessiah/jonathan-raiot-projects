@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ResearchController">
+    <children>
+        <Label id="title_Register" layoutX="183.0" layoutY="14.0" prefHeight="49.0" prefWidth="387.0" text="Registrar Investigación" textAlignment="CENTER">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="33.0" />
+            </font>
+        </Label>
+        <Label id="txt_Name" layoutX="227.0" layoutY="81.0" prefHeight="20.0" prefWidth="242.0" text="Ingrese el nombre de la investigación">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <Label id="txt_Category" layoutX="223.0" layoutY="135.0" text="Ingrese el subtitulo de la investigación">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <Label id="txt_CreatedAt" layoutX="224.0" layoutY="180.0" text="Ingrese la categoria de la investigación">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <Label id="txt_UpdatedAt" layoutX="225.0" layoutY="230.0" text="Ingrese el tema de la investigación">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <Label id="txt_Repository" layoutX="219.0" layoutY="282.0" text="Ingrese el nombre del autor de la investigación">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <TextField fx:id="field_Name" layoutX="223.0" layoutY="101.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Programacion Orientada a Objetos" />
+        <TextField fx:id="field_Theme" layoutX="223.0" layoutY="250.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Sobre programación" />
+        <TextField fx:id="field_Category" layoutX="223.0" layoutY="200.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Educación" />
+        <TextField fx:id="field_Subtitle" layoutX="223.0" layoutY="155.0" prefHeight="25.0" prefWidth="281.0" text="Ej:  POO" />
+        <Button fx:id="btn_Register" layoutX="257.0" layoutY="437.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="78.0" prefWidth="182.0" text="Registrar">
+            <font>
+                <Font name="Arial" size="20.0" />
+            </font>
+        </Button>
+        <TextField fx:id="field_Repository" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
+        <Label fx:id="label_Error" layoutX="173.0" layoutY="515.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+      <Label id="txt_Repository" layoutX="219.0" layoutY="327.0" text="Fecha de inicio de investigación">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="field_CreatedAt" layoutX="219.0" layoutY="347.0" prefHeight="25.0" prefWidth="281.0" />
+      <TextField fx:id="field_UpdatedAt" layoutX="219.0" layoutY="405.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label id="txt_Repository" layoutX="219.0" layoutY="378.0" text="Fecha de modificacion de la investigación">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

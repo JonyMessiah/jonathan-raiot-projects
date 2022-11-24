@@ -20,6 +20,9 @@ public class HomeController {
     Button btn_AddProject;
 
     @FXML
+    Button btn_AddResearch;
+
+    @FXML
     Label label_Count;
     @FXML
     public void initialize() throws Exception {
@@ -37,13 +40,27 @@ public class HomeController {
         label_Count.setText("Existen " + total_projects + " proyecto(s) para tu usuario");
         label_Count.setVisible(true);
     }
+
+
     @FXML
     protected void onAddProjectClick() throws Exception {
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
-
+  
         Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("project.fxml"));
         Stage window = (Stage) btn_AddProject.getScene().getWindow();
         window.setScene(new Scene(registerScene));
     }
+
+    @FXML
+    protected void  onAddResearchClick() throws Exception {
+        SQLiteDao sqlite = new SQLiteDao();
+        Connection connection = sqlite.getConnection();
+
+        Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("research-form.fxml"));
+        Stage window = (Stage) btn_AddResearch.getScene().getWindow();
+        window.setScene(new Scene(registerScene));
+    }
+
+
 }

@@ -11,7 +11,7 @@
             <Font name="Arial Rounded MT Bold" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="btn_AddProject" layoutX="189.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="222.0" text="Agregar un proyecto" onAction="#onAddProjectClick">
+      <Button id="btn_Project" fx:id="btn_AddProject" layoutX="35.0" layoutY="113.0" mnemonicParsing="false" onAction="#onAddProjectClick" prefHeight="60.0" prefWidth="267.0" text="Agregar un proyecto">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -19,5 +19,20 @@
          <font>
             <Font size="13.0" />
          </font></Label>
+      <Button id="btn_Research" fx:id="btn_AddResearch" layoutX="35.0" layoutY="200.0" mnemonicParsing="false" onAction="#onAddResearchClick" prefHeight="60.0" prefWidth="267.0" text="Agregar una investigacion">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button id="btn_ModifyProject" fx:id="btn_ModifyProject" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onAddProjectClick" prefHeight="60.0" prefWidth="267.0" text="Modificar un proyecto">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button id="btn_ModifyResearch" fx:id="btn_ModifyResearch" layoutX="318.0" layoutY="113.0" mnemonicParsing="false" onAction="#onAddProjectClick" prefHeight="60.0" prefWidth="276.0" text="Modificar una investigacion">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
