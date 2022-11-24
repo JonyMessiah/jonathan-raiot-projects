@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="521.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
+<AnchorPane prefHeight="521.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
    <children>
-      <Label id="title_Register" layoutX="183.0" layoutY="14.0" prefHeight="49.0" prefWidth="373.0" text="   Registrar proyecto" textAlignment="CENTER">
+      <Label id="title_Register" fx:id="label_Title_Register" layoutX="183.0" layoutY="14.0" prefHeight="49.0" prefWidth="373.0" text="Registrar proyecto" textAlignment="CENTER">
          <font>
             <Font name="Arial Rounded MT Bold" size="33.0" />
          </font>
       </Label>
-      <Label id="txt_Name" layoutX="227.0" layoutY="81.0" prefHeight="20.0" prefWidth="196.0" text="Ingrese el nombre del proyecto">
+      <Label id="txt_Name" layoutX="216.0" layoutY="106.0" prefHeight="20.0" prefWidth="196.0" text="Ingrese el nombre del proyecto">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label id="txt_Category" layoutX="223.0" layoutY="135.0" text="Ingrese la categoria del proyecto">
+      <Label id="txt_Category" layoutX="212.0" layoutY="160.0" text="Ingrese la categoria del proyecto">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label id="txt_CreatedAt" layoutX="224.0" layoutY="180.0" text="Ingrese la fecha de creación del proyecto">
+      <Label id="txt_CreatedAt" layoutX="213.0" layoutY="205.0" text="Ingrese la fecha de creación del proyecto">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label id="txt_UpdatedAt" layoutX="225.0" layoutY="230.0" text="Ingrese la fecha de modificación del proyecto">
+      <Label id="txt_UpdatedAt" layoutX="214.0" layoutY="255.0" text="Ingrese la fecha de modificación del proyecto">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label id="txt_Repository" layoutX="219.0" layoutY="282.0" text="Ingrese el repositorio del proyecto">
+      <Label id="txt_Repository" layoutX="208.0" layoutY="307.0" text="Ingrese el repositorio del proyecto">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="field_Name" layoutX="223.0" layoutY="101.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Ligol" />
-      <TextField fx:id="field_UpdatedAt" layoutX="223.0" layoutY="250.0" prefHeight="25.0" prefWidth="281.0" text="Ej; 11/9/2022" />
-      <TextField fx:id="field_CreatedAt" layoutX="223.0" layoutY="200.0" prefHeight="25.0" prefWidth="281.0" text="Ej: 10/9/2022" />
-      <TextField fx:id="field_Category" layoutX="223.0" layoutY="155.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Videojuego" />
-      <Button fx:id="btn_Register" layoutX="260.0" layoutY="351.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="182.0" text="Registrar" onAction="#onRegisterButtonClick">
+      <TextField fx:id="field_Name" layoutX="212.0" layoutY="126.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Ligol" />
+      <TextField fx:id="field_UpdatedAt" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="281.0" text="Ej; 11/9/2022" />
+      <TextField fx:id="field_CreatedAt" layoutX="212.0" layoutY="225.0" prefHeight="25.0" prefWidth="281.0" text="Ej: 10/9/2022" />
+      <TextField fx:id="field_Category" layoutX="212.0" layoutY="180.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Videojuego" />
+      <Button fx:id="btn_Register" layoutX="249.0" layoutY="376.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="78.0" prefWidth="182.0" text="Registrar">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="field_Repository" layoutX="223.0" layoutY="302.0" prefHeight="25.0" prefWidth="281.0" />
-      <Label fx:id="label_Error" layoutX="165.0" layoutY="457.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
+      <TextField fx:id="field_Repository" layoutX="212.0" layoutY="327.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label fx:id="label_Error" layoutX="154.0" layoutY="482.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="choices_Projects" layoutX="232.0" layoutY="72.0" prefWidth="150.0" visible="false" />
    </children>
 </AnchorPane>

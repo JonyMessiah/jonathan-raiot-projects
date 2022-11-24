@@ -10,14 +10,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class HomeController {
 
     @FXML
     Button btn_AddProject;
+
+    @FXML
+    Button btn_ModifyProject;
 
     @FXML
     Button btn_AddResearch;
@@ -39,17 +44,37 @@ public class HomeController {
 
         label_Count.setText("Existen " + total_projects + " proyecto(s) para tu usuario");
         label_Count.setVisible(true);
+
+        if (total_projects == 0) {
+            btn_ModifyProject.setVisible(false);
+        }
     }
 
 
     @FXML
-    protected void onAddProjectClick() throws Exception {
+    protected void onAddProjectClick() throws IOException, SQLException {
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
-  
-        Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("project.fxml"));
+
+        FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project.fxml"));
+        Parent root = registerScene.load();
+        ProjectController projectController = registerScene.getController();
+        projectController.setEdit(false);
         Stage window = (Stage) btn_AddProject.getScene().getWindow();
-        window.setScene(new Scene(registerScene));
+        window.setScene(new Scene(root));
+    }
+
+    @FXML
+    protected void onModifyProjectClick() throws IOException, SQLException {
+        SQLiteDao sqlite = new SQLiteDao();
+        Connection connection = sqlite.getConnection();
+
+        FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project.fxml"));
+        Parent root = registerScene.load();
+        ProjectController projectController = registerScene.getController();
+        projectController.setEdit(true);
+        Stage window = (Stage) btn_AddProject.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
     @FXML

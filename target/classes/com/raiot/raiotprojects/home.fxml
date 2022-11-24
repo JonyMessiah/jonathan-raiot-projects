@@ -24,7 +24,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button id="btn_ModifyProject" fx:id="btn_ModifyProject" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onAddProjectClick" prefHeight="60.0" prefWidth="267.0" text="Modificar un proyecto">
+      <Button id="btn_ModifyProject" fx:id="btn_ModifyProject" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#onModifyProjectClick" prefHeight="60.0" prefWidth="267.0" text="Modificar un proyecto">
          <font>
             <Font size="20.0" />
          </font>
