@@ -82,11 +82,7 @@ public class ResearchController {
             label_Error.setText("La fecha debe de estar puesta con numeros.");
             return;
         }
-
-        String repository = field_Repository.getText();
-
-
-        String query = "INSERT INTO researchs (name, category, created_at, updated_at, theme, subtitle user_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO researchs (name, category, created_at, updated_at, theme, subtitle, autor, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, name);
         pstmt.setString(2, category);
@@ -95,6 +91,7 @@ public class ResearchController {
         pstmt.setString(5, theme);
         pstmt.setString(6, subtitle);
         pstmt.setString(7, autor);
+        pstmt.setInt(8, RaiotProjectsApplication.user_id);
 
         pstmt.executeUpdate();
 
