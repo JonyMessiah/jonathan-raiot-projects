@@ -149,6 +149,7 @@ public class ResearchController {
         }
     }
 
+    //boton register
     @FXML void onRegisterButtonClick() throws Exception {
         label_Error.setVisible(false);
 
