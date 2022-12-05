@@ -104,5 +104,15 @@ public class HomeController {
         window.setScene(new Scene(root));
     }
 
+    @FXML
+    protected void  onMediaClick() throws Exception {
+        FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-media.fxml"));
+        Parent root = scene.load();
+        ResearchController controller = scene.getController();
+        controller.setEdit(true);
+        Stage window = (Stage) btn_ModifyResearch.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
 
 }

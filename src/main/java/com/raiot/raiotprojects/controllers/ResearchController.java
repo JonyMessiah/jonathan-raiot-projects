@@ -139,6 +139,7 @@ public class ResearchController {
             field_Autor.setDisable(true);
             field_Category.setDisable(true);
             field_Title.setDisable(true);
+
         } else {
             editing = false;
 
@@ -153,6 +154,8 @@ public class ResearchController {
             field_Autor.setDisable(false);
             field_Category.setDisable(false);
             field_Title.setDisable(false);
+
+
         }
     }
 

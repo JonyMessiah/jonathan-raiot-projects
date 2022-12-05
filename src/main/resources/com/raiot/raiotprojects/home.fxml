@@ -34,5 +34,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button id="btn_Media" layoutX="319.0" layoutY="200.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="276.0" onAction= "#onMediaClick" text="Agregar media">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
