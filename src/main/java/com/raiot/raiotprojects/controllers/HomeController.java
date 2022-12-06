@@ -91,11 +91,11 @@ public class HomeController {
 
     @FXML
     protected void  onAddResearchClick() throws Exception {
-        FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-form.fxml"));
-        Parent root = registerScene.load();
-        ProjectController projectController = registerScene.getController();
-        projectController.setEdit(false);
-        Stage window = (Stage) btn_AddResearch.getScene().getWindow();
+        FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-form.fxml"));
+        Parent root = scene.load();
+        ResearchController controller = scene.getController();
+        controller.setEdit(false);
+        Stage window = (Stage) btn_ModifyResearch.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 

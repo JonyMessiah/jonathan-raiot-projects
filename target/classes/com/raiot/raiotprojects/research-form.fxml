@@ -64,7 +64,7 @@
          </font>
       </Button>
       <ChoiceBox fx:id="choices_Researches" layoutX="189.0" layoutY="63.0" prefHeight="26.0" prefWidth="297.0" />
-      <TextField fx:id="field_title" layoutX="185.0" layoutY="166.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Leyends" />
+      <TextField fx:id="field_Title" layoutX="185.0" layoutY="166.0" prefHeight="25.0" prefWidth="281.0" text="Ej: Leyends" />
       <Label id="label_title" layoutX="189.0" layoutY="149.0" text="Ingrese el titulo" />
     </children>
 </AnchorPane>
