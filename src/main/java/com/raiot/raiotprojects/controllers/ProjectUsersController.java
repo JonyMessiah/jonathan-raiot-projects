@@ -10,12 +10,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -27,6 +32,9 @@ import java.util.ResourceBundle;
 public class ProjectUsersController {
 
     Integer project_id;
+
+    @FXML
+    Button btn_Menu;
 
     @FXML
     private ListView<ChoiceClassUserOnProject> listview_Users;
@@ -113,5 +121,12 @@ public class ProjectUsersController {
                 }
             }
         });
+    }
+
+    @FXML
+    protected void onBackLoginButtonClick() throws Exception {
+        Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
+        Stage window = (Stage) btn_Menu.getScene().getWindow();
+        window.setScene(new Scene(loginScene));
     }
 }

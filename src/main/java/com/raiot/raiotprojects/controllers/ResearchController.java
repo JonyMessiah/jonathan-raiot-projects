@@ -52,6 +52,10 @@ public class ResearchController {
     TextField field_Title;
 
     @FXML
+    TextField field_Content;
+
+
+    @FXML
     TextField field_UpdatedAt;
 
     @FXML
@@ -121,6 +125,9 @@ public class ResearchController {
                                     field_Autor.setText(rs.getString("author"));
                                     field_Category.setDisable(false);
                                     field_Category.setText(rs.getString("category"));
+                                    field_Content.setDisable(false);
+                                    field_Content.setText(rs.getString("content"));
+
                                 }
                                 btn_Delete.setVisible(true);
                             } catch (SQLException e) {
@@ -138,6 +145,7 @@ public class ResearchController {
             field_Autor.setDisable(true);
             field_Category.setDisable(true);
             field_Title.setDisable(true);
+            field_Content.setDisable(true);
 
         } else {
             editing = false;
@@ -153,6 +161,7 @@ public class ResearchController {
             field_Autor.setDisable(false);
             field_Category.setDisable(false);
             field_Title.setDisable(false);
+            field_Content.setDisable(false);
 
 
         }
@@ -193,9 +202,11 @@ public class ResearchController {
 
         String title = field_Title.getText();
 
+        String content = field_Content.getText();
+
         if (editing && id != null) {
 
-            String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ? WHERE id = ?";
+            String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ? WHERE id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, name);
             pstmt.setString(2, category);
@@ -205,11 +216,12 @@ public class ResearchController {
             pstmt.setString(6, subtitle);
             pstmt.setString(7, autor);
             pstmt.setString(8, title);
-            pstmt.setInt(9,  id);
+            pstmt.setString(9, content);
+            pstmt.setInt(10,  id);
             pstmt.executeUpdate();
         } else {
 
-            String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, name);
             pstmt.setString(2, category);
@@ -219,7 +231,9 @@ public class ResearchController {
             pstmt.setString(6, subtitle);
             pstmt.setString(7, autor);
             pstmt.setString(8, title);
-            pstmt.setInt(9, RaiotProjectsApplication.user_id);
+            pstmt.setString(9, content);
+            pstmt.setInt(10, RaiotProjectsApplication.user_id);
+
             pstmt.executeUpdate();
         }
 

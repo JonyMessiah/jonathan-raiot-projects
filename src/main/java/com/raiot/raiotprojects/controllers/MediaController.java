@@ -44,7 +44,7 @@ public class MediaController {
         content = area_content.getText();
 
 
-    String query = "INSERT INTO users (archives, created_at, authorship, content) VALUES (?, ?, ?, ?)";
+    String query = "INSERT INTO research_media (archives, created_at, authorship, content) VALUES (?, ?, ?, ?)";
     PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, archives);
         pstmt.setString(2, created_at);
