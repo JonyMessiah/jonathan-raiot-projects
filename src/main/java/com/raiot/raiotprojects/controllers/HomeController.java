@@ -31,6 +31,9 @@ public class HomeController {
     Button btn_ModifyResearch;
 
     @FXML
+    Button btn_Media;
+
+    @FXML
     Label label_Count;
     @FXML
     public void initialize() throws Exception {
@@ -109,12 +112,9 @@ public class HomeController {
 
     @FXML
     protected void  onMediaClick() throws Exception {
-        FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-media.fxml"));
-        Parent root = scene.load();
-        ResearchController controller = scene.getController();
-        controller.setEdit(true);
-        Stage window = (Stage) btn_ModifyResearch.getScene().getWindow();
-        window.setScene(new Scene(root));
+        Parent mediaScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("research-media.fxml"));
+        Stage window = (Stage) btn_Media.getScene().getWindow();
+        window.setScene(new Scene(mediaScene));
     }
 
 

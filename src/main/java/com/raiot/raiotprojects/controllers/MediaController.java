@@ -58,7 +58,7 @@ public class MediaController {
 
     @FXML
     protected void onBackLoginButtonClick() throws Exception {
-        Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("login.fxml"));
+        Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
         Stage window = (Stage) btn_Menu.getScene().getWindow();
         window.setScene(new Scene(loginScene));
     }
