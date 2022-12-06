@@ -40,19 +40,32 @@ public class HomeController {
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
 
-        String query = "SELECT COUNT(*) AS recordCount FROM projects WHERE  user_id = ?";
+        String query = "SELECT COUNT(*) AS recordCount FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ? AND (project_users.role = ? OR project_users.role = ?)";
 
         PreparedStatement pstmt  = connection.prepareStatement(query);
         pstmt.setInt(1, RaiotProjectsApplication.user_id);
+        pstmt.setString(2, "owner");
+        pstmt.setString(3, "leader");
         ResultSet rs    = pstmt.executeQuery();
         rs.next();
         Integer total_projects = rs.getInt("recordCount");
 
         label_Count.setText("Existen " + total_projects + " proyecto(s) para tu usuario");
         label_Count.setVisible(true);
-
         if (total_projects == 0) {
             btn_ModifyProject.setVisible(false);
+        }
+
+        String queryProjectsIn = "SELECT COUNT(*) AS recordCount FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
+
+        PreparedStatement pstmtProjectsIn  = connection.prepareStatement(queryProjectsIn);
+        pstmtProjectsIn.setInt(1, RaiotProjectsApplication.user_id);
+        ResultSet rsprojectin    = pstmtProjectsIn.executeQuery();
+        rsprojectin.next();
+        Integer total_projectsin= rsprojectin.getInt("recordCount");
+
+        if (total_projectsin == 0) {
+            btn_AddResearch.setVisible(false);
         }
 
         String queryResearches = "SELECT COUNT(*) AS recordCount FROM researches WHERE  user_id = ?";
@@ -63,9 +76,11 @@ public class HomeController {
         rsresearches.next();
         Integer total_researches = rsresearches.getInt("recordCount");
 
-        if (total_researches == 0) {
+        if (total_researches == 0 || total_projectsin == 0) {
             btn_ModifyResearch.setVisible(false);
         }
+
+
     }
 
 

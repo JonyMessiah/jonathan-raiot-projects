@@ -67,7 +67,7 @@ public class ProjectController {
 
             SQLiteDao sqlite = new SQLiteDao();
             Connection connection = sqlite.getConnection();
-            String query = "SELECT * FROM projects WHERE  user_id = ?";
+            String query = "SELECT * FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
 
             PreparedStatement pstmt  = connection.prepareStatement(query);
             pstmt.setInt(1, RaiotProjectsApplication.user_id);
