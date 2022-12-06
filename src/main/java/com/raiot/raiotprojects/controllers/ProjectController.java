@@ -15,10 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProjectController {
     @FXML
@@ -57,6 +54,7 @@ public class ProjectController {
 
 
     Integer id;
+    Integer owner_id;
     Boolean editing = false;
 
     void setEdit(Boolean edit) throws SQLException {
@@ -213,6 +211,26 @@ public class ProjectController {
             pstmt.setInt(6, RaiotProjectsApplication.user_id);
 
             pstmt.executeUpdate();
+
+
+            String queryInserted = "SELECT last_insert_rowid()";
+
+            PreparedStatement pstmtInserted  = connection.prepareStatement(queryInserted);
+
+            ResultSet rsInserted = pstmtInserted.executeQuery();
+
+            if (rsInserted.next()) {
+                final Integer insertedID = rsInserted.getInt("last_insert_rowid()");
+                String projectQuery = "INSERT INTO project_users(user_id, project_id, role) VALUES(?, ?, ?) \n" +
+                        "ON CONFLICT(user_id, project_id) DO UPDATE SET role = ?;";
+                PreparedStatement pstmtOwner  = null;
+                pstmtOwner = connection.prepareStatement(projectQuery);
+                pstmtOwner.setInt(1, RaiotProjectsApplication.user_id);
+                pstmtOwner.setInt(2, insertedID);
+                pstmtOwner.setString(3, "owner");
+                pstmtOwner.setString(4, "owner");
+                pstmtOwner.executeUpdate();
+            }
         }
 
         onRegisterClick();
