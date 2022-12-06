@@ -32,6 +32,9 @@ public class ProjectController {
     Button btn_Delete;
 
     @FXML
+    Button bnt_Users;
+
+    @FXML
     TextField field_Name;
 
     @FXML
@@ -57,6 +60,7 @@ public class ProjectController {
 
     void setEdit(Boolean edit) throws SQLException {
         btn_Delete.setVisible(false);
+        bnt_Users.setVisible(false);
         if (edit) {
 
             SQLiteDao sqlite = new SQLiteDao();
@@ -104,6 +108,7 @@ public class ProjectController {
                                     field_Repository.setText(rs.getString("repository"));
                                 }
                                 btn_Delete.setVisible(true);
+                                bnt_Users.setVisible(true);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
