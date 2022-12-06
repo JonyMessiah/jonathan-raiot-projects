@@ -13,6 +13,10 @@ public class ChoiceClassString {
         return this.value;
     }
 
+    public void  setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return label;

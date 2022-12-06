@@ -153,7 +153,7 @@ public class ProjectController {
         FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project-users.fxml"));
         Parent root = scene.load();
         ProjectUsersController controller = scene.getController();
-        //controller.setEdit(true);
+        controller.initialize(id);
         Stage window = (Stage) btn_Users.getScene().getWindow();
         window.setScene(new Scene(root));
     }
