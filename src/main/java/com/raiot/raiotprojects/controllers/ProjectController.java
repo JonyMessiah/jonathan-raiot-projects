@@ -32,7 +32,8 @@ public class ProjectController {
     Button btn_Delete;
 
     @FXML
-    Button bnt_Users;
+    Button btn_Users;
+
 
     @FXML
     TextField field_Name;
@@ -60,7 +61,7 @@ public class ProjectController {
 
     void setEdit(Boolean edit) throws SQLException {
         btn_Delete.setVisible(false);
-        bnt_Users.setVisible(false);
+        btn_Users.setVisible(false);
         if (edit) {
 
             SQLiteDao sqlite = new SQLiteDao();
@@ -108,7 +109,7 @@ public class ProjectController {
                                     field_Repository.setText(rs.getString("repository"));
                                 }
                                 btn_Delete.setVisible(true);
-                                bnt_Users.setVisible(true);
+                                btn_Users.setVisible(true);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -146,6 +147,15 @@ public class ProjectController {
         pstmt.executeUpdate();
 
         onRegisterClick();
+    }
+
+    @FXML void onUsersButtonClick() throws Exception {
+        FXMLLoader scene = new FXMLLoader(RaiotProjectsApplication.class.getResource("project-users.fxml"));
+        Parent root = scene.load();
+        ProjectUsersController controller = scene.getController();
+        //controller.setEdit(true);
+        Stage window = (Stage) btn_Users.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
     @FXML void onRegisterButtonClick() throws Exception {

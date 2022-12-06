@@ -44,7 +44,6 @@
       <Label fx:id="label_Error" layoutX="183.0" layoutY="467.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
          <font>
             <Font size="15.0" />
-            
          </font>
       </Label>
       <ChoiceBox fx:id="choices_Projects" layoutX="232.0" layoutY="72.0" prefWidth="150.0" visible="false" />
@@ -53,7 +52,7 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="bnt_Users" layoutX="208.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="289.0" text="Manejo de usuarios" visible="false">
+      <Button fx:id="btn_Users" layoutX="208.0" layoutY="416.0" mnemonicParsing="false" onAction="#onUsersButtonClick" prefHeight="40.0" prefWidth="289.0" text="Manejo de usuarios" visible="false">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
