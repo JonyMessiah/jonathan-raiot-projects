@@ -62,5 +62,10 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
+      <Button fx:id="btn_Menu" layoutX="511.0" layoutY="26.0" mnemonicParsing="false" onAction="#onBackLoginButtonClick" prefHeight="37.0" prefWidth="165.0" text="Volver al menú">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
