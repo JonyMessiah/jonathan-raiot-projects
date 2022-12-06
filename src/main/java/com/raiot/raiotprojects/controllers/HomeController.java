@@ -88,9 +88,12 @@ public class HomeController {
 
     @FXML
     protected void  onAddResearchClick() throws Exception {
-        Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("research-form.fxml"));
+        FXMLLoader registerScene = new FXMLLoader(RaiotProjectsApplication.class.getResource("research-form.fxml"));
+        Parent root = registerScene.load();
+        ProjectController projectController = registerScene.getController();
+        projectController.setEdit(false);
         Stage window = (Stage) btn_AddResearch.getScene().getWindow();
-        window.setScene(new Scene(registerScene));
+        window.setScene(new Scene(root));
     }
 
 

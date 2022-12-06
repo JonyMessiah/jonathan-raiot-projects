@@ -72,7 +72,6 @@ public class ResearchController {
     void setEdit(Boolean edit) throws SQLException {
         btn_Delete.setVisible(false);
         if (edit) {
-
             SQLiteDao sqlite = new SQLiteDao();
             Connection connection = sqlite.getConnection();
             String query = "SELECT * FROM researches WHERE  user_id = ?";
