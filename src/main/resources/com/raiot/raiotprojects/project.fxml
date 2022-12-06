@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="521.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
+<AnchorPane prefHeight="547.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raiot.raiotprojects.controllers.ProjectController">
    <children>
       <Label id="title_Register" fx:id="label_Title_Register" layoutX="183.0" layoutY="14.0" prefHeight="49.0" prefWidth="373.0" text="Registrar proyecto" textAlignment="CENTER">
          <font>
@@ -41,7 +41,7 @@
          </font>
       </Button>
       <TextField fx:id="field_Repository" layoutX="212.0" layoutY="327.0" prefHeight="25.0" prefWidth="281.0" />
-      <Label fx:id="label_Error" layoutX="183.0" layoutY="467.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
+      <Label fx:id="label_Error" layoutX="184.0" layoutY="495.0" prefHeight="25.0" prefWidth="373.0" text="Asegurese de rellenar todos los espacios correctamente." textFill="#fc2f2f">
          <font>
             <Font size="15.0" />
          </font>
@@ -53,6 +53,11 @@
          </font>
       </Button>
       <Button fx:id="btn_Users" layoutX="208.0" layoutY="416.0" mnemonicParsing="false" onAction="#onUsersButtonClick" prefHeight="40.0" prefWidth="289.0" text="Manejo de usuarios" visible="false">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_Statistics" layoutX="282.0" layoutY="456.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="25.0" prefWidth="141.0" text="Estadisticas">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
