@@ -71,6 +71,9 @@ public class ResearchController {
     Button btn_Delete;
 
     @FXML
+    Button btn_Menu;
+
+    @FXML
     Label label_Title_Register;
 
     void setEdit(Boolean edit) throws SQLException {
@@ -258,6 +261,13 @@ public class ResearchController {
         pstmt.executeUpdate();
 
         onRegisterClick();
+    }
+
+    @FXML
+    protected void onBackLoginButtonClick() throws Exception {
+        Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
+        Stage window = (Stage) btn_Menu.getScene().getWindow();
+        window.setScene(new Scene(loginScene));
     }
 
 }

@@ -41,6 +41,9 @@ public class ProjectController {
     TextField field_CreatedAt;
 
     @FXML
+    Button btn_Menu;
+
+    @FXML
     TextField field_UpdatedAt;
 
     @FXML
@@ -241,6 +244,13 @@ public class ProjectController {
         Parent registerScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
         Stage window = (Stage) btn_Register.getScene().getWindow();
         window.setScene(new Scene(registerScene));
+    }
+
+    @FXML
+    protected void onBackLoginButtonClick() throws Exception {
+        Parent loginScene = FXMLLoader.load(RaiotProjectsApplication.class.getResource("home.fxml"));
+        Stage window = (Stage) btn_Menu.getScene().getWindow();
+        window.setScene(new Scene(loginScene));
     }
 
 }
