@@ -2,6 +2,8 @@ package com.raiot.raiotprojects.controllers;
 
 import com.raiot.raiotprojects.RaiotProjectsApplication;
 import com.raiot.raiotprojects.classes.ChoiceClass;
+import com.raiot.raiotprojects.classes.ChoiceClassString;
+import com.raiot.raiotprojects.classes.ChoiceClassUserOnProject;
 import com.raiot.raiotprojects.dao.SQLiteDao;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -67,7 +69,7 @@ public class ProjectController {
 
             SQLiteDao sqlite = new SQLiteDao();
             Connection connection = sqlite.getConnection();
-            String query = "SELECT * FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
+            String query = "SELECT projects.*, project_users.role as role FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
 
             PreparedStatement pstmt  = connection.prepareStatement(query);
             pstmt.setInt(1, RaiotProjectsApplication.user_id);
@@ -75,10 +77,10 @@ public class ProjectController {
 
             editing = true;
 
-            ObservableList<ChoiceClass> choices = FXCollections.observableArrayList();
+            ObservableList<ChoiceClassUserOnProject> choices = FXCollections.observableArrayList();
 
             while (rs.next()) {
-                ChoiceClass item = new ChoiceClass(rs.getString("name"), rs.getInt("id"));
+                ChoiceClassUserOnProject item = new ChoiceClassUserOnProject(rs.getInt("id"), rs.getString("name"), new ChoiceClassString("", rs.getString("name")));
                 choices.add(item);
             }
 
