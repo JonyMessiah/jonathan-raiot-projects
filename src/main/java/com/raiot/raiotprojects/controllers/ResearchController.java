@@ -2,6 +2,8 @@ package com.raiot.raiotprojects.controllers;
 
 import com.raiot.raiotprojects.RaiotProjectsApplication;
 import com.raiot.raiotprojects.classes.ChoiceClass;
+import com.raiot.raiotprojects.classes.ChoiceClassString;
+import com.raiot.raiotprojects.classes.ChoiceClassUserOnProject;
 import com.raiot.raiotprojects.dao.SQLiteDao;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -76,11 +78,33 @@ public class ResearchController {
     @FXML
     Label label_Title_Register;
 
+    String role;
+
+    @FXML
+    ChoiceBox choices_Projects;
+
     void setEdit(Boolean edit) throws SQLException {
         btn_Delete.setVisible(false);
+
+        SQLiteDao sqlite = new SQLiteDao();
+        Connection connection = sqlite.getConnection();
+        String queryProjects = "SELECT projects.*, project_users.role as role FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
+
+        PreparedStatement pstmtProjects  = connection.prepareStatement(queryProjects);
+        pstmtProjects.setInt(1, RaiotProjectsApplication.user_id);
+        ResultSet rsProjects = pstmtProjects.executeQuery();
+
+        ObservableList<ChoiceClassUserOnProject> choicesProjects = FXCollections.observableArrayList();
+
+        while (rsProjects.next()) {
+            ChoiceClassUserOnProject item = new ChoiceClassUserOnProject(rsProjects.getInt("id"), rsProjects.getString("name"), new ChoiceClassString("", rsProjects.getString("role")));
+            choicesProjects.add(item);
+        }
+
+
+        choices_Projects.setItems(choicesProjects);
+
         if (edit) {
-            SQLiteDao sqlite = new SQLiteDao();
-            Connection connection = sqlite.getConnection();
             String query = "SELECT * FROM researches WHERE  user_id = ?";
 
             PreparedStatement pstmt  = connection.prepareStatement(query);

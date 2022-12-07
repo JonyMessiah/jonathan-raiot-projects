@@ -53,17 +53,16 @@ public class ProjectUsersController {
 
         SQLiteDao sqlite = new SQLiteDao();
         Connection connection = sqlite.getConnection();
-        String query = "SELECT users.*, project_users.role as role FROM users LEFT JOIN project_users ON (users.id = project_users.user_id AND project_users.project_id = ? AND (project_users.role = ? OR project_users.role = ?))";
+        String query = "SELECT users.*, project_users.role as role FROM users LEFT JOIN project_users ON (users.id = project_users.user_id AND project_users.project_id = ?)";
 
         PreparedStatement pstmt  = null;
         try {
             pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, project_id);
-            pstmt.setString(2, "owner");
-            pstmt.setString(3, "leader");
             ResultSet rs    = pstmt.executeQuery();
             while(rs.next()) {
                 String roleId = rs.getString("role");
+                System.out.println(roleId);
                 String roleName = "";
                 if (roleId != null) {
                     if (roleId.equals("researcher")) {
