@@ -69,10 +69,12 @@ public class ProjectController {
 
             SQLiteDao sqlite = new SQLiteDao();
             Connection connection = sqlite.getConnection();
-            String query = "SELECT projects.*, project_users.role as role FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ?";
+            String query = "SELECT projects.*, project_users.role as role FROM projects JOIN project_users ON projects.id = project_users.project_id WHERE project_users.user_id = ? AND (project_users.role = ? OR project_users.role = ?)";
 
             PreparedStatement pstmt  = connection.prepareStatement(query);
             pstmt.setInt(1, RaiotProjectsApplication.user_id);
+            pstmt.setString(2, "owner");
+            pstmt.setString(3, "leader");
             ResultSet rs    = pstmt.executeQuery();
 
             editing = true;
@@ -80,7 +82,7 @@ public class ProjectController {
             ObservableList<ChoiceClassUserOnProject> choices = FXCollections.observableArrayList();
 
             while (rs.next()) {
-                ChoiceClassUserOnProject item = new ChoiceClassUserOnProject(rs.getInt("id"), rs.getString("name"), new ChoiceClassString("", rs.getString("name")));
+                ChoiceClassUserOnProject item = new ChoiceClassUserOnProject(rs.getInt("id"), rs.getString("name"), new ChoiceClassString("", rs.getString("role")));
                 choices.add(item);
             }
 
@@ -88,9 +90,9 @@ public class ProjectController {
             choices_Projects.setItems(choices);
 
             choices_Projects.getSelectionModel().selectedItemProperty().addListener(
-                    new ChangeListener<ChoiceClass>() {
-                        public void changed(ObservableValue<? extends ChoiceClass> ov,
-                                            ChoiceClass old_val, ChoiceClass new_val) {
+                    new ChangeListener<ChoiceClassUserOnProject>() {
+                        public void changed(ObservableValue<? extends ChoiceClassUserOnProject> ov,
+                                            ChoiceClassUserOnProject old_val, ChoiceClassUserOnProject new_val) {
                             id = (Integer) new_val.getValue();
                             try {
                                 String projectQuery = "SELECT * FROM projects WHERE id = ?";
@@ -111,8 +113,16 @@ public class ProjectController {
                                     field_Repository.setDisable(false);
                                     field_Repository.setText(rs.getString("repository"));
                                 }
-                                btn_Delete.setVisible(true);
-                                btn_Users.setVisible(true);
+                                System.out.println("hello");
+                                System.out.println(new_val.getRole().getValue());
+                                if (new_val.getRole().getValue().equals("owner")) {
+                                    btn_Delete.setVisible(true);
+                                    btn_Users.setVisible(true);
+                                } else {
+                                    btn_Delete.setVisible(false);
+                                    btn_Users.setVisible(false);
+                                }
+
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
