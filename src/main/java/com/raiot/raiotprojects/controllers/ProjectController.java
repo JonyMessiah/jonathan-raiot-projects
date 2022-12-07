@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -57,6 +58,17 @@ public class ProjectController {
     @FXML
     ChoiceBox choices_Projects;
 
+    @FXML
+    Label label_Most_Researches;
+
+    @FXML
+    Label label_Most_Approved_Researches;
+
+    @FXML
+    Label label_Biggest_Research;
+
+    @FXML
+    Pane pane_Stats;
 
     Integer id;
     Integer owner_id;
@@ -114,9 +126,49 @@ public class ProjectController {
                                     field_Category.setText(rs.getString("category"));
                                     field_Repository.setDisable(false);
                                     field_Repository.setText(rs.getString("repository"));
+
+                                    pane_Stats.setVisible(true);
+
+                                    String projectMostResearch = "SELECT researches.name as name, users.name as username, users.lastname as userlastname, COUNT(*) as total FROM researches JOIN users ON users.id = researches.user_id WHERE project_id = ? GROUP BY researches.user_id ORDER BY total DESC";
+                                    PreparedStatement pstmtMostResearch  = null;
+                                    pstmtMostResearch = connection.prepareStatement(projectMostResearch);
+                                    pstmtMostResearch.setInt(1, (Integer) id);
+                                    ResultSet rsMostResearch    = pstmtMostResearch.executeQuery();
+
+                                    if (rsMostResearch.next()) {
+                                        label_Most_Researches.setText(rsMostResearch.getString("username") + " " + rsMostResearch.getString("userlastname") + " (" + rsMostResearch.getString("total") + ")");
+                                    } else {
+                                        label_Most_Researches.setText("");
+                                    }
+
+                                    String projectMostApprovedResearch = "SELECT researches.name as name, users.name as username, users.lastname as userlastname, COUNT(*) as total FROM researches JOIN users ON users.id = researches.user_id WHERE project_id = ? AND researches.approved_by IS NOT NULL GROUP BY researches.user_id ORDER BY total DESC";
+                                    PreparedStatement pstmtMostApprovedResearch  = null;
+                                    pstmtMostApprovedResearch = connection.prepareStatement(projectMostApprovedResearch);
+                                    pstmtMostApprovedResearch.setInt(1, (Integer) id);
+                                    ResultSet rsMostApprovedResearch    = pstmtMostApprovedResearch.executeQuery();
+
+                                    if (rsMostApprovedResearch.next()) {
+                                        label_Most_Approved_Researches.setText(rsMostApprovedResearch.getString("username") + " " + rsMostApprovedResearch.getString("userlastname") + " (" + rsMostApprovedResearch.getString("total") + ")");
+                                    } else {
+                                        label_Most_Approved_Researches.setText("");
+                                    }
+
+                                    String projectBiggestResearch = "SELECT researches.name as name, users.name as username, users.lastname as userlastname FROM researches JOIN users ON users.id = researches.user_id WHERE project_id = ? AND researches.approved_by IS NOT NULL ORDER BY word_count_unique DESC";
+                                    PreparedStatement pstmtBiggestResearch  = null;
+                                    pstmtBiggestResearch = connection.prepareStatement(projectBiggestResearch);
+                                    pstmtBiggestResearch.setInt(1, (Integer) id);
+                                    ResultSet rsBiggestResearch    = pstmtBiggestResearch.executeQuery();
+
+                                    if (rsBiggestResearch.next()) {
+                                        label_Biggest_Research.setText(rsBiggestResearch.getString("username") + " " + rsBiggestResearch.getString("userlastname") + " (" + rsBiggestResearch.getString("name") + ")");
+                                    } else {
+                                        label_Biggest_Research.setText("");
+                                    }
+
+
+
                                 }
-                                System.out.println("hello");
-                                System.out.println(new_val.getRole().getValue());
+
                                 if (new_val.getRole().getValue().equals("owner")) {
                                     btn_Delete.setVisible(true);
                                     btn_Users.setVisible(true);

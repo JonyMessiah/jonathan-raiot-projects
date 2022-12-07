@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class ResearchController {
     @FXML
@@ -89,6 +91,9 @@ public class ResearchController {
 
     @FXML
     Label label_Status;
+
+    @FXML
+    Label label_Words;
 
     void setEdit(Boolean edit) throws SQLException {
 
@@ -181,6 +186,7 @@ public class ResearchController {
                                     field_Content.setText(rs.getString("content"));
                                     role = rs.getString("role");
                                     Integer approved_by = rs.getInt("approved_by");
+
                                     if (rs.wasNull()) {
                                         label_Status.setText("Status: Pendiente");
 
@@ -192,6 +198,7 @@ public class ResearchController {
                                     } else {
                                         label_Status.setText("Status: Aprobada");
                                     }
+                                    label_Words.setText("Palabras unicas: " + rs.getString("word_count_unique"));
 
                                 }
                                 btn_Delete.setVisible(true);
@@ -269,10 +276,16 @@ public class ResearchController {
 
         String content = field_Content.getText();
 
+        String[] words = content.toLowerCase().split(" ");
+
+        HashSet<String> uniqueWords = new HashSet<String>(Arrays.asList(words));
+
+        Integer totalUniqueWords = uniqueWords.size();
+
         if (editing && id != null) {
 
             if (role.equals("owner") || role.equals("leader")) {
-                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = ?  WHERE id = ?";
+                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = ?, word_count_unique = ?  WHERE id = ?";
                 PreparedStatement pstmt = connection.prepareStatement(query);
                 pstmt.setString(1, name);
                 pstmt.setString(2, category);
@@ -284,10 +297,11 @@ public class ResearchController {
                 pstmt.setString(8, title);
                 pstmt.setString(9, content);
                 pstmt.setInt(10, RaiotProjectsApplication.user_id);
-                pstmt.setInt(11,  id);
+                pstmt.setInt(11, totalUniqueWords);
+                pstmt.setInt(12,  id);
                 pstmt.executeUpdate();
             } else {
-                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = NULL  WHERE id = ?";
+                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = NULL, word_count_unique = ?  WHERE id = ?";
                 PreparedStatement pstmt = connection.prepareStatement(query);
                 pstmt.setString(1, name);
                 pstmt.setString(2, category);
@@ -298,14 +312,15 @@ public class ResearchController {
                 pstmt.setString(7, autor);
                 pstmt.setString(8, title);
                 pstmt.setString(9, content);
-                pstmt.setInt(10,  id);
+                pstmt.setInt(10, totalUniqueWords);
+                pstmt.setInt(11,  id);
                 pstmt.executeUpdate();
             }
 
         } else {
 
             if (role.equals("owner") || role.equals("leader")) {
-                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id, approved_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id, approved_by, word_count_unique) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = connection.prepareStatement(query);
                 pstmt.setString(1, name);
                 pstmt.setString(2, category);
@@ -319,9 +334,10 @@ public class ResearchController {
                 pstmt.setInt(10, RaiotProjectsApplication.user_id);
                 pstmt.setInt(11, project_id);
                 pstmt.setInt(12, RaiotProjectsApplication.user_id);
+                pstmt.setInt(13, totalUniqueWords);
                 pstmt.executeUpdate();
             } else {
-                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id, word_count_unique) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = connection.prepareStatement(query);
                 pstmt.setString(1, name);
                 pstmt.setString(2, category);
@@ -334,6 +350,7 @@ public class ResearchController {
                 pstmt.setString(9, content);
                 pstmt.setInt(10, RaiotProjectsApplication.user_id);
                 pstmt.setInt(11, project_id);
+                pstmt.setInt(12, totalUniqueWords);
                 pstmt.executeUpdate();
             }
         }
