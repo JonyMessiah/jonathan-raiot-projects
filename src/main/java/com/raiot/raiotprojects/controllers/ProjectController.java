@@ -60,6 +60,7 @@ public class ProjectController {
 
     Integer id;
     Integer owner_id;
+    String role;
     Boolean editing = false;
 
     void setEdit(Boolean edit) throws SQLException {
@@ -94,6 +95,7 @@ public class ProjectController {
                         public void changed(ObservableValue<? extends ChoiceClassUserOnProject> ov,
                                             ChoiceClassUserOnProject old_val, ChoiceClassUserOnProject new_val) {
                             id = (Integer) new_val.getValue();
+                            role = new_val.getRole().getValue();
                             try {
                                 String projectQuery = "SELECT * FROM projects WHERE id = ?";
                                 PreparedStatement pstmt  = null;
@@ -205,16 +207,31 @@ public class ProjectController {
 
 
         if (editing && id != null) {
-            String query = "UPDATE projects SET name = ?, category = ?, created_at = ?, updated_at = ?, repository =? WHERE id = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setString(1, name);
-            pstmt.setString(2, category);
-            pstmt.setString(3, created_at);
-            pstmt.setString(4, updated_at);
-            pstmt.setString(5, repository);
-            pstmt.setInt(6, id);
 
-            pstmt.executeUpdate();
+            if (role.equals("owner")) {
+                String query = "UPDATE projects SET name = ?, category = ?, created_at = ?, updated_at = ?, repository =? WHERE id = ?";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, repository);
+                pstmt.setInt(6, id);
+
+                pstmt.executeUpdate();
+            } else {
+                String query = "INSERT INTO project_changes (name, category, created_at, updated_at, repository, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, repository);
+                pstmt.setInt(6, RaiotProjectsApplication.user_id);
+                pstmt.setInt(7, id);
+
+                pstmt.executeUpdate();
+            }
         } else {
             String query = "INSERT INTO projects (name, category, created_at, updated_at, repository, user_id) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
