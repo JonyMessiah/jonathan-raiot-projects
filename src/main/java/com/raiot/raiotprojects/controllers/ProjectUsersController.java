@@ -62,7 +62,6 @@ public class ProjectUsersController {
             ResultSet rs    = pstmt.executeQuery();
             while(rs.next()) {
                 String roleId = rs.getString("role");
-                System.out.println(roleId);
                 String roleName = "";
                 if (roleId != null) {
                     if (roleId.equals("researcher")) {
@@ -89,46 +88,58 @@ public class ProjectUsersController {
         listview_Users.getItems().addAll(users);
 
         listview_Users.setCellFactory(param -> new ListCell<ChoiceClassUserOnProject>() {
-            private ChoiceBox choiceBox = new ChoiceBox<ChoiceClassString>(choices);
 
             private Label ownerLabel = new Label("Gestor");
             private BorderPane bp = new BorderPane();
             @Override
             protected void updateItem(ChoiceClassUserOnProject item, boolean empty) {
+                super.updateItem(item, empty);
                 if (item == null || empty) {
                     setText(null);
                     setGraphic(null);
                 } else {
+
+                    ChoiceBox choiceBox = new ChoiceBox<ChoiceClassString>();
+                    ObservableList<ChoiceClassString> choices = FXCollections.observableArrayList();
+                    ChoiceClassString leaderChoice = new ChoiceClassString("Líder", "leader");
+                    leaderChoice.setChoiceClassUserOnProject(item);
+                    choices.add(leaderChoice);
+                    ChoiceClassString researcherChoice = new ChoiceClassString("Investigador", "researcher");
+                    researcherChoice.setChoiceClassUserOnProject(item);
+                    choices.add(researcherChoice);
+
+                    choiceBox.getItems().addAll(choices);
+                    System.out.println("executing update " + item.getValue());
+                    System.out.println("executing update " + item.getRole().getValue());
                     setText(item.toString());
                     if (item.getRole().getValue() == null || !item.getRole().getValue().equals("owner")) {
-                        if (item.getRole().getValue() != null) {
-                            choiceBox.setValue(item.getRole());
-                        }
                         choiceBox.getSelectionModel().selectedItemProperty().addListener(
                                 new ChangeListener<ChoiceClassString>() {
                                     public void changed(ObservableValue<? extends ChoiceClassString> ov,
                                                         ChoiceClassString old_val, ChoiceClassString new_val) {
-
                                         if (old_val != null && old_val.getValue() == new_val.getValue()) return;
-
                                         item.setRole(new_val);
                                         String id = new_val.getValue();
-                                        System.out.println(id);
                                         try {
-                                            String projectQuery = "INSERT INTO project_users(user_id, project_id, role) VALUES(?, ?, ?) \n" +
-                                                    "ON CONFLICT(user_id, project_id) DO UPDATE SET role = ?;";
-                                            PreparedStatement pstmt  = null;
-                                            pstmt = connection.prepareStatement(projectQuery);
-                                            pstmt.setInt(1, (Integer) item.getValue());
-                                            pstmt.setInt(2, project_id);
-                                            pstmt.setString(3, new_val.getValue());
-                                            pstmt.setString(4, new_val.getValue());
-                                            pstmt.executeUpdate();
+                                            if (new_val.getChoiceClassUserOnProject() != null) {
+                                                String projectQuery = "INSERT INTO project_users(user_id, project_id, role) VALUES(?, ?, ?) \n" +
+                                                        "ON CONFLICT(user_id, project_id) DO UPDATE SET role = ?;";
+                                                PreparedStatement pstmt = null;
+                                                pstmt = connection.prepareStatement(projectQuery);
+                                                pstmt.setInt(1, (Integer) new_val.getChoiceClassUserOnProject().getValue());
+                                                pstmt.setInt(2, project_id);
+                                                pstmt.setString(3, new_val.getValue());
+                                                pstmt.setString(4, new_val.getValue());
+                                                pstmt.executeUpdate();
+                                            }
                                         } catch (SQLException e) {
                                             throw new RuntimeException(e);
                                         }
                                     }
                                 });
+                        if (item.getRole().getValue() != null) {
+                            choiceBox.setValue(item.getRole());
+                        }
                         bp.setRight(choiceBox);
                         setGraphic(bp);
                     } else {

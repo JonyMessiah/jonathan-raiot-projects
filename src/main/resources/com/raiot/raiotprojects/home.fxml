@@ -34,25 +34,6 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btn_Media" layoutX="319.0" layoutY="200.0" mnemonicParsing="false" onAction="#onMediaClick" prefHeight="60.0" prefWidth="276.0" text="Agregar media">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="btn_Search" layoutX="318.0" layoutY="295.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="276.0" text="Busqueda de contenido">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Button id="btn_ApproveProject" fx:id="btn_ApproveProject" layoutX="35.0" layoutY="383.0" mnemonicParsing="false" onAction="#onModifyProjectClick" prefHeight="60.0" prefWidth="267.0" text="Aprobar cambios proyecto">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button id="btn_ApproveResearch" fx:id="btn_ApproveResearch" layoutX="318.0" layoutY="383.0" mnemonicParsing="false" onAction="#onModifyProjectClick" prefHeight="60.0" prefWidth="267.0" text="Aprobar investigacion">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
+
    </children>
 </AnchorPane>

@@ -76,11 +76,6 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btn_Archives" layoutX="91.0" layoutY="317.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="42.0" prefWidth="162.0" text="Archivos">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Button>
       <Button fx:id="btn_Menu" layoutX="536.0" layoutY="12.0" mnemonicParsing="false" onAction="#onBackLoginButtonClick" prefHeight="42.0" prefWidth="162.0" text="Volver al menú">
          <font>
             <Font name="Arial" size="20.0" />
