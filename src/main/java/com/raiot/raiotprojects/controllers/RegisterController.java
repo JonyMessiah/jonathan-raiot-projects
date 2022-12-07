@@ -54,7 +54,7 @@ public class RegisterController {
 
         String name = field_Name.getText();
 
-        if (name.matches("^[a-zA-Z]$") == false) {
+        if (name.matches("^[a-zA-Z]$") == true) {
             label_Error.setVisible(true);
             label_Error.setText("Solo puede utilizar letras en su nombre.");
             return;
@@ -62,7 +62,7 @@ public class RegisterController {
 
         String lastname = field_LastName.getText();
 
-        if (lastname.matches("^[a-zA-Z]$") == false) {
+        if (lastname.matches("^[a-zA-Z]$") == true) {
             label_Error.setVisible(true);
             label_Error.setText("Solo puede utilizar letras en su apellido.");
             return;
