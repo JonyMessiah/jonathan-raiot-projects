@@ -25,6 +25,12 @@ public class HomeController {
     Button btn_ModifyProject;
 
     @FXML
+    Button btn_ApproveProject;
+
+    @FXML
+    Button btn_ApproveResearch;
+
+    @FXML
     Button btn_AddResearch;
 
     @FXML
@@ -50,7 +56,7 @@ public class HomeController {
         rs.next();
         Integer total_projects = rs.getInt("recordCount");
 
-        label_Count.setText("Existen " + total_projects + " proyecto(s) para tu usuario");
+
         label_Count.setVisible(true);
         if (total_projects == 0) {
             btn_ModifyProject.setVisible(false);
@@ -63,6 +69,8 @@ public class HomeController {
         ResultSet rsprojectin    = pstmtProjectsIn.executeQuery();
         rsprojectin.next();
         Integer total_projectsin= rsprojectin.getInt("recordCount");
+
+        label_Count.setText("Existen " + total_projectsin + " proyecto(s) para tu usuario");
 
         if (total_projectsin == 0) {
             btn_AddResearch.setVisible(false);
@@ -79,6 +87,36 @@ public class HomeController {
         if (total_researches == 0 || total_projectsin == 0) {
             btn_ModifyResearch.setVisible(false);
         }
+
+        String queryProjectsWithChanges = "SELECT COUNT(*) AS recordCount FROM projects JOIN project_users ON projects.id = project_users.project_id JOIN project_changes ON project_changes.project_id = projects.id WHERE project_changes.approved_by IS NULL AND project_users.user_id = ? AND project_users.role = ?";
+
+        PreparedStatement pstmtProjectsWithChanges  = connection.prepareStatement(queryProjectsWithChanges);
+        pstmtProjectsWithChanges.setInt(1, RaiotProjectsApplication.user_id);
+        pstmtProjectsWithChanges.setString(2, "owner");
+        ResultSet rsprojectwithchanges    = pstmtProjectsWithChanges.executeQuery();
+        rsprojectwithchanges.next();
+        Integer total_projectswithchanges= rsprojectwithchanges.getInt("recordCount");
+
+        if (total_projectswithchanges == 0) {
+            btn_ApproveProject.setVisible(false);
+        }
+
+        String queryInvestigationsToApprove = "SELECT COUNT(*) AS recordCount FROM projects JOIN project_users ON projects.id = project_users.project_id JOIN researches ON researches.project_id = projects.id WHERE researches.approved_by IS NULL AND project_users.user_id = ? AND (project_users.role = ? OR project_users.role = ?)";
+
+        PreparedStatement pstmtInvestigationsToApprove  = connection.prepareStatement(queryInvestigationsToApprove);
+        pstmtInvestigationsToApprove.setInt(1, RaiotProjectsApplication.user_id);
+        pstmtInvestigationsToApprove.setString(2, "owner");
+        pstmtInvestigationsToApprove.setString(3, "leader");
+        ResultSet rsprojectresearchwithchanges   = pstmtInvestigationsToApprove.executeQuery();
+        rsprojectresearchwithchanges.next();
+        Integer total_research_with_changes= rsprojectresearchwithchanges.getInt("recordCount");
+
+        if (total_research_with_changes == 0) {
+            btn_ApproveResearch.setVisible(false);
+        }
+
+
+
 
 
     }
