@@ -79,11 +79,21 @@ public class ResearchController {
     Label label_Title_Register;
 
     String role;
+    Integer project_id;
 
     @FXML
     ChoiceBox choices_Projects;
 
+    @FXML
+    Button btn_Approve;
+
+    @FXML
+    Label label_Status;
+
     void setEdit(Boolean edit) throws SQLException {
+
+        label_Status.setText("Status: Pendiente");
+
         btn_Delete.setVisible(false);
 
         SQLiteDao sqlite = new SQLiteDao();
@@ -104,6 +114,15 @@ public class ResearchController {
 
         choices_Projects.setItems(choicesProjects);
 
+        choices_Projects.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<ChoiceClassUserOnProject>() {
+                    public void changed(ObservableValue<? extends ChoiceClassUserOnProject> ov,
+                                        ChoiceClassUserOnProject old_val, ChoiceClassUserOnProject new_val) {
+                        project_id = (Integer) new_val.getValue();
+                        role = new_val.getRole().getValue();
+                    }
+                });
+
         if (edit) {
             String query = "SELECT * FROM researches WHERE  user_id = ?";
 
@@ -121,6 +140,8 @@ public class ResearchController {
             }
 
             choices_Researches.setVisible(true);
+            choices_Projects.setVisible(false);
+
             choices_Researches.setItems(choices);
 
             choices_Researches.getSelectionModel().selectedItemProperty().addListener(
@@ -154,6 +175,12 @@ public class ResearchController {
                                     field_Category.setText(rs.getString("category"));
                                     field_Content.setDisable(false);
                                     field_Content.setText(rs.getString("content"));
+                                    Integer approved_by = rs.getInt("approved_by");
+                                    if (rs.wasNull()) {
+                                        label_Status.setText("Status: Pendiente");
+                                    } else {
+                                        label_Status.setText("Status: Aprobada");
+                                    }
 
                                 }
                                 btn_Delete.setVisible(true);
@@ -233,7 +260,7 @@ public class ResearchController {
 
         if (editing && id != null) {
 
-            String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ? WHERE id = ?";
+            String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = NULL  WHERE id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, name);
             pstmt.setString(2, category);
@@ -248,7 +275,7 @@ public class ResearchController {
             pstmt.executeUpdate();
         } else {
 
-            String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, name);
             pstmt.setString(2, category);
@@ -260,6 +287,7 @@ public class ResearchController {
             pstmt.setString(8, title);
             pstmt.setString(9, content);
             pstmt.setInt(10, RaiotProjectsApplication.user_id);
+            pstmt.setInt(11, project_id);
 
             pstmt.executeUpdate();
         }
