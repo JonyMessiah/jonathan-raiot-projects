@@ -124,10 +124,13 @@ public class ResearchController {
                 });
 
         if (edit) {
-            String query = "SELECT * FROM researches WHERE  user_id = ?";
+            String query = "SELECT * FROM researches JOIN project_users ON project_users.project_id = researches.project_id WHERE project_users.user_id = ? AND (researches.user_id = ? OR (project_users.role = ? OR project_users.role = ?))";
 
             PreparedStatement pstmt  = connection.prepareStatement(query);
             pstmt.setInt(1, RaiotProjectsApplication.user_id);
+            pstmt.setInt(2, RaiotProjectsApplication.user_id);
+            pstmt.setString(3, "owner");
+            pstmt.setString(4, "leader");
             ResultSet rs    = pstmt.executeQuery();
 
             editing = true;
@@ -150,10 +153,11 @@ public class ResearchController {
                                             ChoiceClass old_val, ChoiceClass new_val) {
                             id = (Integer) new_val.getValue();
                             try {
-                                String projectQuery = "SELECT * FROM researches WHERE id = ?";
+                                String projectQuery = "SELECT researches.*, project_users.role as role FROM researches JOIN project_users ON project_users.project_id = researches.project_id WHERE researches.id = ? AND project_users.user_id = ?";
                                 PreparedStatement pstmt  = null;
                                 pstmt = connection.prepareStatement(projectQuery);
                                 pstmt.setInt(1, (Integer) id);
+                                pstmt.setInt(2, RaiotProjectsApplication.user_id);
                                 ResultSet rs    = pstmt.executeQuery();
                                 while (rs.next()) {
                                     label_Title_Register.setText(rs.getString("name"));
@@ -175,9 +179,16 @@ public class ResearchController {
                                     field_Category.setText(rs.getString("category"));
                                     field_Content.setDisable(false);
                                     field_Content.setText(rs.getString("content"));
+                                    role = rs.getString("role");
                                     Integer approved_by = rs.getInt("approved_by");
                                     if (rs.wasNull()) {
                                         label_Status.setText("Status: Pendiente");
+
+                                        if (role.equals("owner") || role.equals("leader")) {
+                                            btn_Approve.setVisible(true);
+                                        } else {
+                                            btn_Approve.setVisible(false);
+                                        }
                                     } else {
                                         label_Status.setText("Status: Aprobada");
                                     }
@@ -260,40 +271,88 @@ public class ResearchController {
 
         if (editing && id != null) {
 
-            String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = NULL  WHERE id = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setString(1, name);
-            pstmt.setString(2, category);
-            pstmt.setString(3, created_at);
-            pstmt.setString(4, updated_at);
-            pstmt.setString(5, theme);
-            pstmt.setString(6, subtitle);
-            pstmt.setString(7, autor);
-            pstmt.setString(8, title);
-            pstmt.setString(9, content);
-            pstmt.setInt(10,  id);
-            pstmt.executeUpdate();
+            if (role.equals("owner") || role.equals("leader")) {
+                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = ?  WHERE id = ?";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, theme);
+                pstmt.setString(6, subtitle);
+                pstmt.setString(7, autor);
+                pstmt.setString(8, title);
+                pstmt.setString(9, content);
+                pstmt.setInt(10, RaiotProjectsApplication.user_id);
+                pstmt.setInt(11,  id);
+                pstmt.executeUpdate();
+            } else {
+                String query = "UPDATE researches SET name = ?, category = ?, created_at = ?, updated_at = ?, theme = ?, subtitle = ?, author = ?, title = ?, content= ?, approved_by = NULL  WHERE id = ?";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, theme);
+                pstmt.setString(6, subtitle);
+                pstmt.setString(7, autor);
+                pstmt.setString(8, title);
+                pstmt.setString(9, content);
+                pstmt.setInt(10,  id);
+                pstmt.executeUpdate();
+            }
+
         } else {
 
-            String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setString(1, name);
-            pstmt.setString(2, category);
-            pstmt.setString(3, created_at);
-            pstmt.setString(4, updated_at);
-            pstmt.setString(5, theme);
-            pstmt.setString(6, subtitle);
-            pstmt.setString(7, autor);
-            pstmt.setString(8, title);
-            pstmt.setString(9, content);
-            pstmt.setInt(10, RaiotProjectsApplication.user_id);
-            pstmt.setInt(11, project_id);
-
-            pstmt.executeUpdate();
+            if (role.equals("owner") || role.equals("leader")) {
+                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id, approved_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, theme);
+                pstmt.setString(6, subtitle);
+                pstmt.setString(7, autor);
+                pstmt.setString(8, title);
+                pstmt.setString(9, content);
+                pstmt.setInt(10, RaiotProjectsApplication.user_id);
+                pstmt.setInt(11, project_id);
+                pstmt.setInt(12, RaiotProjectsApplication.user_id);
+                pstmt.executeUpdate();
+            } else {
+                String query = "INSERT INTO researches (name, category, created_at, updated_at, theme, subtitle, author, title, content, user_id, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, name);
+                pstmt.setString(2, category);
+                pstmt.setString(3, created_at);
+                pstmt.setString(4, updated_at);
+                pstmt.setString(5, theme);
+                pstmt.setString(6, subtitle);
+                pstmt.setString(7, autor);
+                pstmt.setString(8, title);
+                pstmt.setString(9, content);
+                pstmt.setInt(10, RaiotProjectsApplication.user_id);
+                pstmt.setInt(11, project_id);
+                pstmt.executeUpdate();
+            }
         }
 
         onRegisterClick();
 
+    }
+
+    @FXML void onApproveClick() throws  Exception {
+        SQLiteDao sqlite = new SQLiteDao();
+        Connection connection = sqlite.getConnection();
+
+        String query = "UPDATE researches SET approved_by = ? WHERE id = ?";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setInt(1, RaiotProjectsApplication.user_id);
+        pstmt.setInt(2, id);
+        pstmt.executeUpdate();
+
+        onRegisterClick();
     }
 
     protected void onRegisterClick() throws  Exception {
